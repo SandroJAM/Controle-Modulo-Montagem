@@ -43,6 +43,19 @@ A API sobe em `http://localhost:8081/api`.
 | `DB_PASSWORD` | senha do Postgres |
 | `ERP_WEBHOOK_API_KEY` | chave que o ERP deve enviar no header `X-Api-Key` |
 | `ERP_NOTIFICACAO_URL` | URL do ERP para onde o módulo envia atualizações de status |
+| `ADMIN_INICIAL_NOME` | nome do usuário admin criado automaticamente (opcional) |
+| `ADMIN_INICIAL_EMAIL` | e-mail do usuário admin criado automaticamente (opcional) |
+| `ADMIN_INICIAL_SENHA` | senha do usuário admin criado automaticamente (defina antes do primeiro `run`!) |
+
+## Primeiro acesso
+
+Na primeira vez que o backend sobe, se o banco não tiver **nenhum** usuário
+ainda, um usuário `ADMIN` é criado automaticamente (ver `AdminSeeder`).
+Por padrão as credenciais são `admin@modulomontagem.local` / `troque-esta-senha`
+— **defina `ADMIN_INICIAL_EMAIL`/`ADMIN_INICIAL_SENHA` antes de rodar pela
+primeira vez** para não depender do valor padrão, especialmente fora do seu
+ambiente local. Depois de logar, crie seu usuário definitivo pela tela de
+Usuários e, se quiser, desative este.
 
 ## Rodando o frontend
 
@@ -66,8 +79,6 @@ Sobe em `http://localhost:4201`, apontando para a API em `http://localhost:8081/
 
 ## Próximos passos sugeridos
 
-- [ ] Popular um usuário `ADMIN` inicial (seed) para o primeiro acesso, já
-      que a criação de usuário hoje exige estar autenticado como admin.
 - [ ] Adicionar Flyway para migrations versionadas (hoje usa `ddl-auto=update`,
       adequado só para desenvolvimento).
 - [ ] Tela de detalhe da Ordem de Montagem (checklist, ocorrências, histórico).

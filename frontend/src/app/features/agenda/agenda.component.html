@@ -1,22 +1,73 @@
-<h1>Agendar Montagem</h1>
+<nav class="breadcrumb">
+  <a routerLink="/ordens-montagem">Página Inicial</a> / Agenda
+</nav>
 
-<form [formGroup]="form" (ngSubmit)="submeter()">
+<div class="toolbar">
+  <div class="toolbar-grupo">
+    <button class="btn-acao btn-acao--inserir" (click)="abrirInserir()">+ Inserir</button>
+    <button class="btn-acao btn-acao--editar" disabled title="Reagendamento em breve">✎ Editar</button>
+    <button class="btn-acao btn-acao--excluir" disabled title="Exclusão ainda não disponível nesta versão">
+      🗑 Excluir
+    </button>
+  </div>
+</div>
+
+<form *ngIf="mostrarFormulario()" [formGroup]="form" (ngSubmit)="submeter()" class="filtros" style="align-items: flex-start; margin-bottom: 1.5rem;">
   <label>
     ID da Ordem de Montagem
     <input type="number" formControlName="ordemMontagemId" />
   </label>
-
   <label>
     ID do Montador
     <input type="number" formControlName="montadorId" />
   </label>
-
   <label>
     Data e hora
     <input type="datetime-local" formControlName="dataHora" />
   </label>
-
-  <p *ngIf="confirmacao" class="sucesso">{{ confirmacao }}</p>
-
-  <button type="submit" [disabled]="form.invalid">Agendar</button>
+  <button type="submit" class="btn-acao btn-acao--inserir" [disabled]="form.invalid">Agendar</button>
+  <button type="button" class="btn-acao btn-acao--secundario" (click)="cancelar()">Cancelar</button>
 </form>
+
+<p *ngIf="confirmacao" class="sucesso">{{ confirmacao }}</p>
+
+<div class="pagina-seletor">
+  <select [(ngModel)]="itensPorPagina" [ngModelOptions]="{ standalone: true }">
+    <option [ngValue]="20">20</option>
+    <option [ngValue]="50">50</option>
+    <option [ngValue]="100">100</option>
+  </select>
+  resultados por página
+</div>
+
+<p *ngIf="carregando">Carregando...</p>
+
+<div class="tabela-wrapper" *ngIf="!carregando">
+  <table>
+    <thead>
+      <tr>
+        <th>Ordem de Montagem</th>
+        <th>Montador</th>
+        <th>Data / Hora</th>
+        <th>Status</th>
+      </tr>
+      <tr class="linha-filtro">
+        <th><input type="text" [(ngModel)]="filtroOrdem" [ngModelOptions]="{ standalone: true }" /></th>
+        <th><input type="text" [(ngModel)]="filtroMontador" [ngModelOptions]="{ standalone: true }" /></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of listaFiltrada | slice:0:itensPorPagina">
+        <td>{{ a.ordemMontagemId }}</td>
+        <td>{{ a.montadorId }}</td>
+        <td>{{ a.dataHora | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ a.status }}</td>
+      </tr>
+      <tr *ngIf="listaFiltrada.length === 0">
+        <td colspan="4">Nenhum agendamento encontrado.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -20,3 +20,119 @@ html, body {
   align-items: flex-end;
   margin-bottom: 1rem;
 }
+
+/* ---- Padrao de tela de listagem (breadcrumb + toolbar + tabela) ---- */
+
+.breadcrumb {
+  font-size: 0.85rem;
+  color: #6b7684;
+  margin-bottom: 1rem;
+
+  a { color: #6b7684; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.toolbar-grupo {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-acao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+}
+
+.btn-acao--inserir { background-color: #6aa84f; &:hover:not(:disabled) { background-color: #5c9142; } }
+.btn-acao--editar { background-color: #4a90d9; &:hover:not(:disabled) { background-color: #3d78b8; } }
+.btn-acao--excluir { background-color: #c0392b; &:hover:not(:disabled) { background-color: #a4301f; } }
+.btn-acao--secundario {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #d7dce2;
+  &:hover:not(:disabled) { background-color: #f4f6f9; }
+}
+
+.pagina-seletor {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #444;
+  margin-bottom: 0.75rem;
+
+  select {
+    padding: 0.3rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #d7dce2;
+  }
+}
+
+.tabela-wrapper {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  thead tr:first-child th {
+    background: #eef1f5;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    color: #3a4655;
+    border-bottom: 1px solid #e2e6ec;
+  }
+
+  thead tr.linha-filtro th {
+    background: #fff;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid #e2e6ec;
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #d7dce2;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+  }
+
+  tbody td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid #eef1f5;
+    color: #333;
+  }
+
+  tbody tr:hover { background: #f7f9fb; }
+
+  th.col-checkbox, td.col-checkbox { width: 40px; text-align: center; }
+}

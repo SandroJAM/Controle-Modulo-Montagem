@@ -23,7 +23,10 @@ public class AgendaController {
     }
 
     @GetMapping
-    public List<AgendaDTO> listarPorOrdem(@RequestParam Long ordemMontagemId) {
-        return agendaService.listarPorOrdem(ordemMontagemId);
+    public List<AgendaDTO> listar(@RequestParam(required = false) Long ordemMontagemId) {
+        if (ordemMontagemId != null) {
+            return agendaService.listarPorOrdem(ordemMontagemId);
+        }
+        return agendaService.listarTodas();
     }
 }

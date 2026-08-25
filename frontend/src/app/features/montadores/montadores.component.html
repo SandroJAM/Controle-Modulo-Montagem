@@ -1,25 +1,82 @@
-<h1>Montadores</h1>
+<nav class="breadcrumb">
+  <a routerLink="/ordens-montagem">Página Inicial</a> / Montadores
+</nav>
 
-<form [formGroup]="form" (ngSubmit)="submeter()">
-  <input type="text" formControlName="nome" placeholder="Nome" />
-  <input type="text" formControlName="telefone" placeholder="Telefone" />
-  <input type="text" formControlName="areaAtuacao" placeholder="Área de atuação" />
+<div class="toolbar">
+  <div class="toolbar-grupo">
+    <button class="btn-acao btn-acao--inserir" (click)="abrirInserir()">+ Inserir</button>
+    <button class="btn-acao btn-acao--editar" (click)="abrirEditar()" [disabled]="selecionadoId() === null">
+      ✎ Editar
+    </button>
+    <button class="btn-acao btn-acao--excluir" disabled title="Exclusão ainda não disponível nesta versão">
+      🗑 Excluir
+    </button>
+  </div>
+</div>
+
+<!-- Formulario de inserir/editar, exibido sob demanda -->
+<form *ngIf="mostrarFormulario()" [formGroup]="form" (ngSubmit)="submeter()" class="filtros" style="align-items: flex-start; margin-bottom: 1.5rem;">
   <label>
+    Nome
+    <input type="text" formControlName="nome" />
+  </label>
+  <label>
+    Telefone
+    <input type="text" formControlName="telefone" />
+  </label>
+  <label>
+    Área de atuação
+    <input type="text" formControlName="areaAtuacao" />
+  </label>
+  <label style="display: flex; align-items: center; gap: 0.4rem; margin-top: 1.4rem;">
     <input type="checkbox" formControlName="terceirizado" /> Terceirizado
   </label>
-  <button type="submit" [disabled]="form.invalid">Adicionar</button>
+  <button type="submit" class="btn-acao btn-acao--inserir" [disabled]="form.invalid">
+    {{ idEmEdicao ? 'Salvar' : 'Adicionar' }}
+  </button>
+  <button type="button" class="btn-acao btn-acao--secundario" (click)="cancelar()">Cancelar</button>
 </form>
 
-<table>
-  <thead>
-    <tr><th>Nome</th><th>Telefone</th><th>Área</th><th>Tipo</th></tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let m of montadores">
-      <td>{{ m.nome }}</td>
-      <td>{{ m.telefone }}</td>
-      <td>{{ m.areaAtuacao }}</td>
-      <td>{{ m.terceirizado ? 'Terceirizado' : 'Próprio' }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="pagina-seletor">
+  <select [(ngModel)]="itensPorPagina" [ngModelOptions]="{ standalone: true }">
+    <option [ngValue]="20">20</option>
+    <option [ngValue]="50">50</option>
+    <option [ngValue]="100">100</option>
+  </select>
+  resultados por página
+</div>
+
+<div class="tabela-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th class="col-checkbox"></th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Área de Atuação</th>
+        <th>Tipo</th>
+      </tr>
+      <tr class="linha-filtro">
+        <th></th>
+        <th><input type="text" [(ngModel)]="filtroNome" [ngModelOptions]="{ standalone: true }" /></th>
+        <th></th>
+        <th><input type="text" [(ngModel)]="filtroArea" [ngModelOptions]="{ standalone: true }" /></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of listaFiltrada | slice:0:itensPorPagina">
+        <td class="col-checkbox">
+          <input type="radio" name="selecao" [checked]="selecionadoId() === m.id" (click)="selecionar(m.id!)" />
+        </td>
+        <td>{{ m.nome }}</td>
+        <td>{{ m.telefone }}</td>
+        <td>{{ m.areaAtuacao }}</td>
+        <td>{{ m.terceirizado ? 'Terceirizado' : 'Próprio' }}</td>
+      </tr>
+      <tr *ngIf="listaFiltrada.length === 0">
+        <td colspan="5">Nenhum montador encontrado.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

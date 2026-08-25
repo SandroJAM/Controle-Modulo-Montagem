@@ -1,4 +1,10 @@
-<h1>Volume de Montagens por Filial</h1>
+<nav class="breadcrumb">
+  <a routerLink="/ordens-montagem">Página Inicial</a> / Dashboard
+</nav>
+
+<div class="toolbar">
+  <div class="toolbar-grupo"></div>
+</div>
 
 <form class="filtros" (ngSubmit)="carregar()">
   <label>
@@ -19,7 +25,7 @@
     </select>
   </label>
 
-  <button type="submit">Aplicar</button>
+  <button type="submit" class="btn-acao btn-acao--inserir">Aplicar</button>
 </form>
 
 <p *ngIf="carregando">Carregando...</p>
@@ -27,35 +33,37 @@
 <ng-container *ngIf="!carregando">
   <p class="resumo">Total de ordens no período: <strong>{{ totalGeral }}</strong></p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Empresa</th>
-        <th>Filial</th>
-        <th>Volume</th>
-        <th></th>
-        <th>Concluídas</th>
-        <th>Em andamento</th>
-        <th>Com pendência</th>
-        <th>Canceladas</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let linha of dados">
-        <td>{{ linha.empresaNome }}</td>
-        <td>{{ linha.filialNome }}</td>
-        <td>{{ linha.totalOrdens }}</td>
-        <td class="barra-container">
-          <div class="barra" [style.width.%]="(linha.totalOrdens / maiorVolume) * 100"></div>
-        </td>
-        <td>{{ linha.concluidas }}</td>
-        <td>{{ linha.emAndamento }}</td>
-        <td>{{ linha.comPendencia }}</td>
-        <td>{{ linha.canceladas }}</td>
-      </tr>
-      <tr *ngIf="dados.length === 0">
-        <td colspan="8">Nenhuma ordem de montagem encontrada no período selecionado.</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="tabela-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th>Filial</th>
+          <th>Volume</th>
+          <th></th>
+          <th>Concluídas</th>
+          <th>Em andamento</th>
+          <th>Com pendência</th>
+          <th>Canceladas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let linha of dados">
+          <td>{{ linha.empresaNome }}</td>
+          <td>{{ linha.filialNome }}</td>
+          <td>{{ linha.totalOrdens }}</td>
+          <td class="barra-container">
+            <div class="barra" [style.width.%]="(linha.totalOrdens / maiorVolume) * 100"></div>
+          </td>
+          <td>{{ linha.concluidas }}</td>
+          <td>{{ linha.emAndamento }}</td>
+          <td>{{ linha.comPendencia }}</td>
+          <td>{{ linha.canceladas }}</td>
+        </tr>
+        <tr *ngIf="dados.length === 0">
+          <td colspan="8">Nenhuma ordem de montagem encontrada no período selecionado.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </ng-container>

@@ -1,19 +1,40 @@
-<div class="login-container">
-  <h1>Módulo de Montagem</h1>
+<div class="login-page">
+  <div class="login-card">
+    <p class="login-card__subtitle">Digite suas credenciais para entrar no sistema</p>
 
-  <form [formGroup]="form" (ngSubmit)="submeter()">
-    <label>
-      E-mail
-      <input type="email" formControlName="email" />
-    </label>
+    <form [formGroup]="form" (ngSubmit)="submeter()">
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="E-mail"
+        class="login-card__input"
+        autocomplete="username"
+      />
 
-    <label>
-      Senha
-      <input type="password" formControlName="senha" />
-    </label>
+      <input
+        type="password"
+        formControlName="senha"
+        placeholder="Senha"
+        class="login-card__input"
+        autocomplete="current-password"
+      />
 
-    <p *ngIf="erro" class="erro">{{ erro }}</p>
+      <label class="login-card__lembrar">
+        <input type="checkbox" formControlName="lembrarEmail" />
+        Lembrar e-mail?
+      </label>
 
-    <button type="submit" [disabled]="form.invalid">Entrar</button>
-  </form>
+      <p *ngIf="erro" class="login-card__erro">{{ erro }}</p>
+
+      <div class="login-card__acoes">
+        <button type="submit" class="login-card__botao" [disabled]="form.invalid || carregando">
+          {{ carregando ? 'Entrando...' : 'Entrar' }}
+        </button>
+      </div>
+
+      <p class="login-card__link-esqueci">
+        Esqueceu sua senha? <a href="javascript:void(0)">Redefinir</a>
+      </p>
+    </form>
+  </div>
 </div>

@@ -1,0 +1,99 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+
+  // Fundo com gradiente suave, no lugar de uma foto de terceiros.
+  background: linear-gradient(135deg, #eef1f5 0%, #d9e2ec 100%);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+
+  &__subtitle {
+    margin: 0 0 1.5rem;
+    color: #d9822b;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  &__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #d7dce2;
+    border-radius: 8px;
+    font-size: 0.95rem;
+
+    &:focus {
+      outline: none;
+      border-color: #3f51b5;
+    }
+  }
+
+  &__lembrar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 1.25rem;
+    cursor: pointer;
+  }
+
+  &__erro {
+    color: #c0392b;
+    font-size: 0.85rem;
+    margin: -0.5rem 0 1rem;
+  }
+
+  &__acoes {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__botao {
+    background-color: #6aa84f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    &:hover:not(:disabled) {
+      background-color: #5c9142;
+    }
+
+    &:disabled {
+      background-color: #a9c79b;
+      cursor: not-allowed;
+    }
+  }
+
+  &__link-esqueci {
+    margin: 1.5rem 0 0;
+    font-size: 0.9rem;
+    color: #333;
+
+    a {
+      color: #6aa84f;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -15,6 +15,10 @@ export class AgendaService {
     return this.http.post<Agenda>(this.baseUrl, agenda);
   }
 
+  listarTodas(): Observable<Agenda[]> {
+    return this.http.get<Agenda[]>(this.baseUrl);
+  }
+
   listarPorOrdem(ordemMontagemId: number): Observable<Agenda[]> {
     return this.http.get<Agenda[]>(this.baseUrl, { params: { ordemMontagemId } });
   }

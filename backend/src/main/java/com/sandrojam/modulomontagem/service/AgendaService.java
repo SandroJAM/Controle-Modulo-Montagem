@@ -54,6 +54,10 @@ public class AgendaService {
         return agendaRepository.findByOrdemMontagemId(ordemMontagemId).stream().map(this::toDTO).toList();
     }
 
+    public List<AgendaDTO> listarTodas() {
+        return agendaRepository.findAll().stream().map(this::toDTO).toList();
+    }
+
     private AgendaDTO toDTO(Agenda a) {
         return new AgendaDTO(a.getId(), a.getOrdemMontagem().getId(), a.getMontador().getId(),
                 a.getDataHora(), a.getStatus(), a.getMotivoReagendamento());
