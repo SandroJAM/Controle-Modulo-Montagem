@@ -1,0 +1,22 @@
+<h1>Agendar Montagem</h1>
+
+<form [formGroup]="form" (ngSubmit)="submeter()">
+  <label>
+    ID da Ordem de Montagem
+    <input type="number" formControlName="ordemMontagemId" />
+  </label>
+
+  <label>
+    ID do Montador
+    <input type="number" formControlName="montadorId" />
+  </label>
+
+  <label>
+    Data e hora
+    <input type="datetime-local" formControlName="dataHora" />
+  </label>
+
+  <p *ngIf="confirmacao" class="sucesso">{{ confirmacao }}</p>
+
+  <button type="submit" [disabled]="form.invalid">Agendar</button>
+</form>

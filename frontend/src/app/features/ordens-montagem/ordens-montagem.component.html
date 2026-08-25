@@ -1,0 +1,31 @@
+<h1>Ordens de Montagem</h1>
+
+<a routerLink="/ordens-montagem/nova-avulsa">+ Nova ordem avulsa</a>
+
+<p *ngIf="carregando">Carregando...</p>
+
+<table *ngIf="!carregando">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Origem</th>
+      <th>Empresa / Filial</th>
+      <th>Cliente</th>
+      <th>Status</th>
+      <th>Prazo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ordem of ordens">
+      <td>{{ ordem.id }}</td>
+      <td>{{ ordem.origem }}</td>
+      <td>{{ ordem.empresaNome || '-' }} / {{ ordem.filialNome || '-' }}</td>
+      <td>{{ ordem.clienteNome }}</td>
+      <td>{{ ordem.status }}</td>
+      <td>{{ ordem.prazoCombinado }}</td>
+    </tr>
+    <tr *ngIf="ordens.length === 0">
+      <td colspan="5">Nenhuma ordem de montagem encontrada.</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,25 @@
+<h1>Usuários</h1>
+
+<form [formGroup]="form" (ngSubmit)="submeter()">
+  <input type="text" formControlName="nome" placeholder="Nome" />
+  <input type="email" formControlName="email" placeholder="E-mail" />
+  <input type="password" formControlName="senha" placeholder="Senha" />
+  <select formControlName="perfil">
+    <option *ngFor="let p of perfis" [value]="p">{{ p }}</option>
+  </select>
+  <button type="submit" [disabled]="form.invalid">Criar usuário</button>
+</form>
+
+<table>
+  <thead>
+    <tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Ativo</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of usuarios">
+      <td>{{ u.nome }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.perfil }}</td>
+      <td>{{ u.ativo ? 'Sim' : 'Não' }}</td>
+    </tr>
+  </tbody>
+</table>

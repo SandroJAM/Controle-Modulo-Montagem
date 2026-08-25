@@ -1,0 +1,46 @@
+<h1>Nova Ordem de Montagem Avulsa</h1>
+<p class="aviso">Serviço avulso: roda fora do financeiro do ERP (sem geração de cobrança/nota fiscal).</p>
+
+<form [formGroup]="form" (ngSubmit)="submeter()">
+  <label>
+    Cliente
+    <input type="text" formControlName="clienteNome" />
+  </label>
+
+  <label>
+    Telefone
+    <input type="text" formControlName="clienteTelefone" />
+  </label>
+
+  <label>
+    Endereço de entrega
+    <input type="text" formControlName="enderecoEntrega" />
+  </label>
+
+  <label>
+    Prazo combinado
+    <input type="date" formControlName="prazoCombinado" />
+  </label>
+
+  <label>
+    Valor do serviço (opcional)
+    <input type="number" formControlName="valorServicoAvulso" />
+  </label>
+
+  <label>
+    Observações
+    <textarea formControlName="observacoes"></textarea>
+  </label>
+
+  <h2>Itens</h2>
+  <div formArrayName="itens">
+    <div *ngFor="let item of itens.controls; let i = index" [formGroupName]="i" class="item-linha">
+      <input type="text" formControlName="descricao" placeholder="Descrição do móvel" />
+      <input type="number" formControlName="quantidade" min="1" />
+      <button type="button" (click)="removerItem(i)" [disabled]="itens.length === 1">Remover</button>
+    </div>
+  </div>
+  <button type="button" (click)="adicionarItem()">+ Adicionar item</button>
+
+  <button type="submit" [disabled]="form.invalid">Criar Ordem</button>
+</form>

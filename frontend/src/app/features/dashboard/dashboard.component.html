@@ -1,0 +1,61 @@
+<h1>Volume de Montagens por Filial</h1>
+
+<form class="filtros" (ngSubmit)="carregar()">
+  <label>
+    De
+    <input type="date" [(ngModel)]="dataInicio" name="dataInicio" />
+  </label>
+
+  <label>
+    Até
+    <input type="date" [(ngModel)]="dataFim" name="dataFim" />
+  </label>
+
+  <label>
+    Origem
+    <select [(ngModel)]="origem" name="origem">
+      <option value="ERP">Vendas (ERP)</option>
+      <option value="AVULSA">Avulsas</option>
+    </select>
+  </label>
+
+  <button type="submit">Aplicar</button>
+</form>
+
+<p *ngIf="carregando">Carregando...</p>
+
+<ng-container *ngIf="!carregando">
+  <p class="resumo">Total de ordens no período: <strong>{{ totalGeral }}</strong></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Empresa</th>
+        <th>Filial</th>
+        <th>Volume</th>
+        <th></th>
+        <th>Concluídas</th>
+        <th>Em andamento</th>
+        <th>Com pendência</th>
+        <th>Canceladas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let linha of dados">
+        <td>{{ linha.empresaNome }}</td>
+        <td>{{ linha.filialNome }}</td>
+        <td>{{ linha.totalOrdens }}</td>
+        <td class="barra-container">
+          <div class="barra" [style.width.%]="(linha.totalOrdens / maiorVolume) * 100"></div>
+        </td>
+        <td>{{ linha.concluidas }}</td>
+        <td>{{ linha.emAndamento }}</td>
+        <td>{{ linha.comPendencia }}</td>
+        <td>{{ linha.canceladas }}</td>
+      </tr>
+      <tr *ngIf="dados.length === 0">
+        <td colspan="8">Nenhuma ordem de montagem encontrada no período selecionado.</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

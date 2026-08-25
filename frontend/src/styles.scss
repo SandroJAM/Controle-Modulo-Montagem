@@ -1,0 +1,22 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.barra-container {
+  width: 120px;
+}
+
+.barra {
+  height: 10px;
+  background-color: #3f51b5;
+  border-radius: 4px;
+}
+
+.filtros {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}

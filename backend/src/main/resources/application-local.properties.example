@@ -1,0 +1,4 @@
+# Copie este arquivo para "application-local.properties" (ja ignorado no .gitignore)
+# e sobrescreva as credenciais reais do seu ambiente.
+spring.datasource.username=SEU_USUARIO
+spring.datasource.password=SUA_SENHA

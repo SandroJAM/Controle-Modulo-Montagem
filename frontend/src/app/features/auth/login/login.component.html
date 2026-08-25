@@ -1,0 +1,19 @@
+<div class="login-container">
+  <h1>Módulo de Montagem</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submeter()">
+    <label>
+      E-mail
+      <input type="email" formControlName="email" />
+    </label>
+
+    <label>
+      Senha
+      <input type="password" formControlName="senha" />
+    </label>
+
+    <p *ngIf="erro" class="erro">{{ erro }}</p>
+
+    <button type="submit" [disabled]="form.invalid">Entrar</button>
+  </form>
+</div>

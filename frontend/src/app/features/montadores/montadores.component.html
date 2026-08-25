@@ -1,0 +1,25 @@
+<h1>Montadores</h1>
+
+<form [formGroup]="form" (ngSubmit)="submeter()">
+  <input type="text" formControlName="nome" placeholder="Nome" />
+  <input type="text" formControlName="telefone" placeholder="Telefone" />
+  <input type="text" formControlName="areaAtuacao" placeholder="Área de atuação" />
+  <label>
+    <input type="checkbox" formControlName="terceirizado" /> Terceirizado
+  </label>
+  <button type="submit" [disabled]="form.invalid">Adicionar</button>
+</form>
+
+<table>
+  <thead>
+    <tr><th>Nome</th><th>Telefone</th><th>Área</th><th>Tipo</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let m of montadores">
+      <td>{{ m.nome }}</td>
+      <td>{{ m.telefone }}</td>
+      <td>{{ m.areaAtuacao }}</td>
+      <td>{{ m.terceirizado ? 'Terceirizado' : 'Próprio' }}</td>
+    </tr>
+  </tbody>
+</table>
